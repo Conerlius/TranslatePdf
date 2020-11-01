@@ -1,17 +1,28 @@
 #!src/bin/python3
 # -*- coding: utf-8 -*-
 
-from google.cloud import translate_v2 as translate
-import six
+from googletrans import Translator
 
 
 class Create:
     def __init__(self):
+        self._allGoogleList = [
+            # 'translate.google.com',
+            # 'translate.google.co.kr',
+            'translate.google.cn'
+        ]
+        self.server_index = 0
         self.Name = "translate.google.cn"
-        self.translate_client = translate.Client()
+        self.Sleep()
 
     def Translate(self, text):
-        if isinstance(text, six.binary_type):
-            text = text.decode("utf-8")
-        result = self.translate_client.translate(text, target_language='zh-CN')
-        return result
+        result = self.translator.translate(text, dest='zh-CN')
+        return result.text
+    def Sleep(self):
+        self.server_index = self.server_index % len(self._allGoogleList)
+        serverr_name = self._allGoogleList[self.server_index]
+        print(serverr_name)
+        self.translator = Translator(service_urls=[
+            serverr_name
+        ])
+        self.server_index += 1

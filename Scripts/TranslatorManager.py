@@ -1,6 +1,8 @@
 #!src/bin/python3
 # -*- coding: utf-8 -*-
 
+import re
+
 class Create:
     def SetTranslator(self, translator):
         print('SetTranslator ', translator)
@@ -13,6 +15,11 @@ class Create:
         print(target_language)
 
     def Translate(self, text):
-        return self._translator.Translate(text)
+        if not bool(re.search('[a-zA-Z]', text)):
+            return text
+        result = self._translator.Translate(text)
+        return result
+    def Sleep(self):
+        self._translator.Sleep()
 
 Instance = Create()

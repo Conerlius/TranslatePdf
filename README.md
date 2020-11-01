@@ -18,7 +18,7 @@ python 3
 - pdfminer3k
 - pdfminer.six
 - python_docx
-- google-cloud-translate
+- googletrans
 
 
 pdf自动翻译工具

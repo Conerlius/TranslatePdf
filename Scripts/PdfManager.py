@@ -7,6 +7,7 @@ from pdfminer.layout import LAParams,LTTextBoxHorizontal,LTImage,LTCurve,LTFigur
 from pdfminer.pdfpage import PDFPage
 
 import os
+import time
 import Scripts.TranslatorManager as TranslatorManager
 
 class PdfManager:
@@ -20,6 +21,7 @@ class PdfManager:
         device = PDFPageAggregator(rsrcmgr, laparams=laparams)
         interpreter = PDFPageInterpreter(rsrcmgr, device)
         num_page, num_image, num_curve, num_figure, num_TextBoxHorizontal = 0, 0, 0, 0, 0
+        pauseCount = 0
         for page in PDFPage.get_pages(reader, pagenos=set(), maxpages=0, password='', caching=True, check_extractable=True):
             num_page += 1  # 页面增一
             interpreter.process_page(page)
@@ -40,6 +42,12 @@ class PdfManager:
                     num_curve += 1
                 if isinstance(x, LTFigure):  # figure对象
                     num_figure += 1
+                if num_TextBoxHorizontal % 330 == 0 and num_TextBoxHorizontal != 0:
+                    print('休息一会，防止google的检查')
+                    # pauseCount = pauseCount + 1
+                    translator.Sleep()
+                    time.sleep(20)
+
             print('对象数量：%s,页面数：%s,图片数：%s,曲线数：%s,'
                   '水平文本框：%s,' % (num_figure, num_page, num_image, num_curve, num_TextBoxHorizontal))
 
