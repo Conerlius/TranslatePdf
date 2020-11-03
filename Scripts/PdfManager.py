@@ -5,6 +5,8 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import PDFPageAggregator
 from pdfminer.layout import LAParams,LTTextBoxHorizontal,LTImage,LTCurve,LTFigure
 from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfdocument import PDFDocument
+from PyPDF2 import PdfFileWriter, PdfFileReader
 
 import os
 import time
@@ -51,6 +53,8 @@ class PdfManager:
             print('对象数量：%s,页面数：%s,图片数：%s,曲线数：%s,'
                   '水平文本框：%s,' % (num_figure, num_page, num_image, num_curve, num_TextBoxHorizontal))
 
+        a = PDFDocument()
+        a.
 
 
 Instance = PdfManager()

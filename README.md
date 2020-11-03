@@ -19,6 +19,9 @@ python 3
 - pdfminer.six
 - python_docx
 - googletrans
+- PyPDF2
 
 
 pdf自动翻译工具
+
+经过一轮测试后，google的api不能在短时间内调用频繁，项目终止！
